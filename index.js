@@ -315,8 +315,11 @@ Speaker.prototype._unpipe = function (source) {
 
 Speaker.prototype._flush = function () {
   debug('_flush()');
-  this.emit('flush');
-  this.close(false);
+  // delay close
+  setTimeout(function() {
+    this.emit('flush');
+    this.close(false);
+  }.apply(this), 600);
 };
 
 /**
